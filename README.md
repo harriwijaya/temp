@@ -34,8 +34,15 @@ cd mySimuBuild
 cmake -G "Visual Studio 15 2017" -DMOVESENSE_CORE_LIBRARY=../MovesenseCoreLib/ ..\samples\harriwijaya_app
 ```
 4. Open the generated `Project.sln` with Visual Studio 2017. Select `Movesense` project, and then **Rebuild**.
-5. Once rebuilt, do **Debug** → **Start new instance**.
-6. Test the new API (**/Exercise/Sumvector/Harri**):
+5. Copy the provided `accelerometer.csv` file into build folder.
+   - This will create the acceleration value as:
+     - from 0 sec to 2 sec: x,y,z = 0,0,0
+     - from 2 sec to 4 sec: x,y,z = 2,2,2
+     - from 4 sec to 6 sec: x,y,z = 4,4,4
+     - from 6 sec to 8 sec: x,y,z = 6,6,6
+     - then repeat again (in the cycle of 8 sec).
+6. Once rebuilt, do **Debug** → **Start new instance**.
+7. Test the new API (**/Exercise/Sumvector/Harri**):
    - From a location where **wbcmd.exe** is accessible, e.g. `movesense-device-lib\tools`, issue the following command:
    ```
    wbcmd.exe --port TCP127.0.0.1:7044 --op subscribe --path /Exercise/Sumvector/Harri
@@ -43,7 +50,7 @@ cmake -G "Visual Studio 15 2017" -DMOVESENSE_CORE_LIBRARY=../MovesenseCoreLib/ .
    - Notice the results:
      - The 1 seconds averaged value of acceleration is displayed.
      - The LED is shortly blinking (indicated by red rectangle in simulator window) one time for every new averaged acceleration value.
-7. The method to calculate the average is as the following:
+8. The method to calculate the average is as the following:
    - Within window of 1 second, sum each components (x, y, z) of the acceleration 3D vector.
    - After 1 second has elapsed, divide each sum values by the number of samples, i.e. get the averaged value.
    - Calculate the averaged acceleration by: SQRT(meansumX^2 + meansumY^2 + meansumZ^2).
