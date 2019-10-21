@@ -50,6 +50,8 @@ cmake -G "Visual Studio 15 2017" -DMOVESENSE_CORE_LIBRARY=../MovesenseCoreLib/ .
    - Notice the results:
      - The 1 seconds averaged value of acceleration is displayed.
      - The LED is shortly blinking (indicated by red rectangle in simulator window) one time for every new averaged acceleration value.
+     - Scalar acceleration value might be 0.0, since `accelerometer.csv` specified there is 2 sec duration in which the acceleration vector value is 0.0,0.0,0.0, while we average the value in the fixed window of 1 sec.
+   - Press ESC button to `unsubscribe`.
 8. The method to calculate the average is as the following:
    - Within window of 1 second, sum each components (x, y, z) of the acceleration 3D vector.
    - After 1 second has elapsed, divide each sum values by the number of samples, i.e. get the averaged value.
